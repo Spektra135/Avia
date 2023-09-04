@@ -1,15 +1,15 @@
 <template>
-  <aside class="filter">
+  <aside>
     <form class="filter__form form" action="#" method="get" @submit.prevent="submit">
       <fieldset class="form__block">
         <legend class="form__legend">Сортировать</legend>
 
-        <ul class="colors">
-          <li class="colors__item" v-for="sorting in sortings" :key="sorting.value">
-            <label class="colors__label">
+        <ul class="flights__sort">
+          <li v-for="sorting in sortings" :key="sorting.value">
+            <label>
               <input class="" type="radio" name="sorting" :value="sorting.value" v-model="currentSorting" >
 
-              <span> {{ sorting.name }}</span>
+              <span class="filter__text"> {{ sorting.name }}</span>
             </label>
           </li>
         </ul>
@@ -23,7 +23,7 @@
             <label class="check-list__label">
               <input  type="checkbox" name="transfer" :value="transfer.value" v-model="currentTransfer">
 
-              <span>{{ transfer.name }}</span>
+              <span class="filter__text">{{ transfer.name }}</span>
             </label>
           </li>
         </ul>
@@ -52,7 +52,7 @@
           <li class="check-list__item" v-for="carrier in carriers" :key="carrier">
             <label class="check-list__label">
               <input  type="checkbox" name="carrier" :value="carrier" v-model="currentCarrier">
-              <span>
+              <span class="filter__text">
                  {{ carrier }}
               </span>
             </label>
@@ -60,10 +60,10 @@
         </ul>
       </fieldset>
 
-      <button class="filter__submit button button--primery" type="submit">
+      <button class="filter__button button" type="submit">
         Применить
       </button>
-      <button class="filter__reset button button--second" type="button" @click="reset">
+      <button class="filter__button button" type="button" @click="reset">
         Сбросить
       </button>
     </form>
@@ -157,12 +157,13 @@ import dataFlights from "@/data/flights.json";
         this.$emit('update:transfer', this.currentTransfer)
         this.$emit('update:sorting', this.currentSorting)
       },
-      // Добавить обнуление выбора пересадки и авиаперевозчика
       reset() {
         this.$emit('update:priceFrom', '')
         this.$emit('update:priceTo', '')
-        /*this.$emit('update:categoryId', 0)
-        this.$emit('update:colorId', 0)*/
+        this.$emit('update:flightTime', 0)
+        this.$emit('update:transfer', [])
+        this.$emit('update:carrier', [])
+        this.$emit('update:sorting', '')
       },
     },
   }

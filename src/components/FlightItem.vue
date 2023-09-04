@@ -1,25 +1,26 @@
 <template>
-    <div>
-        <div class="flight__flex">
-          <div>
-            <span>{{ departureCity }}, </span>
-
-            <span>{{ departureAirport }} </span>
-
-            <span class="font-blue">({{ departureAirportUid }})</span>
-          </div>
-
-          <span>&rarr;</span>
-
-          <div>
-            <span>{{ arrivalCity }}, </span>
-
-            <span>{{ arrivalAirport }} </span>
-
-            <span class="font-blue">({{ arrivalAirportUid }})</span>
-          </div>
-        </div>
+    <div class="flight__container">
       <div class="flight__flex">
+        <div>
+          <span class="flight__content">{{ departureCity }}, </span>
+
+          <span>{{ departureAirport }} </span>
+
+          <span class="font-blue">({{ departureAirportUid }})</span>
+        </div>
+
+        <span class="flight-arrow"></span>
+
+        <div>
+          <span>{{ arrivalCity }}, </span>
+
+          <span>{{ arrivalAirport }} </span>
+
+          <span class="font-blue">({{ arrivalAirportUid }})</span>
+        </div>
+      </div>
+
+      <div class="flight__flex flight-border">
         <div>
           <span>{{ departureTimeFormatted }} </span>
 
@@ -28,17 +29,16 @@
           <span class="font-blue flight__time-day">{{ departureDayFormatted }}</span>
         </div>
 
-        <div>{{ durationFlightFormatted }} </div>
+        <span class="flight__duration">{{ durationFlightFormatted }} </span>
 
         <div>
-          <span>{{ arrivalTimeFormatted }} </span>
           <span class="font-blue flight__time-day">{{ arrivalDateFormatted }}</span>
-          <span class="font-blue flight__time-day">{{ arrivalDayFormatted }}</span>
+          <span class="font-blue flight__time-day">{{ arrivalDayFormatted }} </span>
+          <span>{{ arrivalTimeFormatted }} </span>
         </div>
+      </div>
 
-        </div>
-
-        <div v-if="countTransfer > 0"> {{ countTransfer }} пересадка</div>
+      <div v-if="countTransfer > 0"  class="flight__transfer"> {{ countTransfer }} пересадка</div>
     </div>
 </template>
 
@@ -125,7 +125,6 @@ export default {
     flights() {
       return result.flights
     },
-
   }
 }
 </script>

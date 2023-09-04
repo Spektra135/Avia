@@ -1,6 +1,6 @@
 <template>
-  <ul class="catalog__list">
-    <li class="catalog__item" v-for="flight in flights" v-bind:key="flight.flightToken">
+  <ul class="flights__list">
+    <li class="flights__item" v-for="flight in flights" v-bind:key="flight.flightToken">
       <FlightRoundTrip  :flight="flight" />
     </li>
 </ul>

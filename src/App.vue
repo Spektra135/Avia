@@ -1,11 +1,12 @@
 <template>
   <main class="content container">
-    <div class="content__catalog">
+    <div class="content__flights">
       <FlightFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :carrier.sync="filterCarrier" :transfer.sync="filterTransfer" :sorting.sync="filterSorting"/>
 
-      <section class="catalog">
+      <section class="flights">
         <FlightsList :flights="flights" />
-        <button v-if="!IsAllFlights" @click.prevent="showMore">Показать ещё</button>
+
+        <button class="button flights__button-more" v-if="!IsAllFlights" @click.prevent="showMore">Показать ещё</button>
       </section>
     </div>
   </main>
@@ -30,13 +31,12 @@ export default {
       IsAllFlights: false,
 
       page: 1,
-      flightsPerPage: 310,
+      flightsPerPage: 2,
     }
   },
   computed: {
     filteredFlights() {
       let filteredDataFlights = dataFlights.result.flights;
-      console.log(filteredDataFlights);
 
       if(this.filterPriceFrom > 0) {
         filteredDataFlights = filteredDataFlights.filter(flight => flight.flight.price.total.amount > this.filterPriceFrom)
@@ -49,7 +49,7 @@ export default {
       if(this.filterCarrier.length > 0) {
         filteredDataFlights = filteredDataFlights.filter(flight => this.filterCarrier.includes(flight.flight.carrier.caption))
       }
-      console.log(filteredDataFlights);
+
       if(this.filterTransfer.length  > 0) {
         filteredDataFlights = filteredDataFlights.filter(flight => {
           if (this.filterTransfer.length  === 1) {
